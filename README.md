@@ -23,6 +23,19 @@ python example.py \
   --arg2 arg2 \
   --arg3 arg3
 ```
+
+Or, you can run your program without specifying all the arguments in your local device.
+```
+python runsync_run.py --run_script_name example.py --run_setting_name BaseConfig
+```
+This is equivalent to below command.
+```
+python example.py \
+  --arg1 arg1 \
+  --arg2 arg2 \
+  --arg3 arg3
+```
+
 ## How to use
 ```
 git clone https://github.com/cjsj156/runsync.git

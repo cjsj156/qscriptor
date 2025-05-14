@@ -1,7 +1,9 @@
 import runpy
 import sys
 import argparse
-from qscriptor.scriptor.presets import get_run_setting
+from presets import get_run_setting
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 def dataclass_to_argv(dclass):
     """
@@ -28,5 +30,7 @@ if __name__ == "__main__":
 
     run_setting = get_run_setting(args.run_setting_name)
     sys.argv[1:] = dataclass_to_argv(run_setting)
+
+    # os.chdir('..')
 
     runpy.run_path(args.run_script_name, run_name="__main__")

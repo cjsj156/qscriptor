@@ -1,10 +1,10 @@
-from scriptor.base_scriptor import BaseScriptor
+from base_scriptor import BaseScriptor
 from dataclasses import asdict
 from glob import glob
 import argparse
 import os
 import re
-from scriptor.presets import get_run_setting, get_header_env_setting
+from presets import get_run_setting, get_header_env_setting
 from pathlib import Path
 
 

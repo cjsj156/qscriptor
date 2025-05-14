@@ -2,15 +2,15 @@
 
 # Definition of qscriptor
 qscriptor_function='
-function qscriptor() {
+function runsync_script() {
     if [ $# -lt 1 ]; then
-        echo "Usage: job_script_manager <project_path> [args...]"
+        echo "Usage: runsync_script <project_path> [args...]"
         return 1
     fi
 
     cd "$1"
     local project_path="$(pwd -P)"
-    local script="$project_path/qscriptor/script.py"
+    local script="$project_path/runsync/script.py"
 
     if [ ! -f "$script" ]; then
         echo "Error: script.py not found at $script"
@@ -36,10 +36,10 @@ function qscriptor() {
 BASHRC_FILE="$HOME/.bashrc"
 
 # check if qscriptor already exists
-if grep -q "function qscriptor()" "$BASHRC_FILE"; then
-    echo "[✔] 'qscriptor' already exists in .bashrc"
+if grep -q "function runsync_script()" "$BASHRC_FILE"; then
+    echo "[✔] 'runsync_script' already exists in .bashrc"
 else
-    echo "[+] Adding 'qscriptor' to $BASHRC_FILE"
+    echo "[+] Adding 'runsync_script' to $BASHRC_FILE"
     echo "$qscriptor_function" >> "$BASHRC_FILE"
     echo "[✔] Done. Run 'source ~/.bashrc' or restart your shell."
 fi

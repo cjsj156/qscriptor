@@ -1,11 +1,10 @@
-### What you can do with qscriptor
+### What you can do with runsync
 
 You can simply make a job script by typing below command.
-
 ```
-qscriptor /path/to/your/project --header_env_setting_name BaseConfig --run_script_name example.py --run_setting_name BaseConfig
+runsync_script /path/to/your/project --header_env_setting_name BaseConfig --run_script_name example.py --run_setting_name BaseConfig
 ```
-scripts/<timestamp>.sh
+Then a script is generated at scripts/<timestamp>.sh
 ```
 #!/bin/bash
 #$ -cwd
@@ -26,39 +25,38 @@ python example.py \
 ```
 ### Quick start
 ```
-git clone https://github.com/cjsj156/qscriptor.git
+git clone https://github.com/cjsj156/runsync.git
 pip install jinja2
 ```
-### Make shell function to call qscriptor on bash
+### Make shell function to call runsync_script on bash
 ```
-cd qscriptor
+cd runsync
 ./set_shell_function.sh
 ```
-### Test qscriptor with BaseConfig
+### Test runsync_script with BaseConfig
 ```
-qscriptor . --header_env_setting_name BaseConfig --run_script_name example.py --run_setting_name BaseConfig
+runsync_script . --header_env_setting_name BaseConfig --run_script_name example.py --run_setting_name BaseConfig
 ```
 It will produce a job script at scripts/timestamp.sh based on BaseConfig preset.
 
 ### Run example.py directly with BaseConfig
 ```
-python run_with_preset.py --run_script_name example.py --run_setting_name BaseConfig
+python runsync_run.py --run_script_name example.py --run_setting_name BaseConfig
 ```
 This executes example.py with arguments pre-defined in BaseConfig.
 
 ### Make a job script to run a program in your project folder
 
-Now you can copy qscriptor to your project folder like below
+Now you can copy runsync directory to your project folder like below
 ```
-rm example.py set_shell_function
-cp * /path/to/your/project_folder/
+cp runsync /path/to/your/project_folder/
 ```
-Note that you should not copy the whole project folder. Instead you need to just copy things inside the project folder.
+Note that you should not copy the whole project folder. Instead you need to just copy runsync direcotory inside this project.
 
-Then, make new configs instead of BaseConfig according to the requirement of your python script. You can add types of settings in header_env_setting and run_setting in qscriptor/scriptor/presets/header_env_settings.py and qscriptor/scriptor/presets/run_settings.py
+Then, make new configs instead of BaseConfig according to the requirement of your python script. You can add types of settings in header_env_setting and run_setting in runsync/presets/header_env_settings.py and runsync/presets/run_settings.py
 
 ```
-qscriptor /path/to/your/project_folder --header_env_setting_name <user-defined-config> --run_script_name <user-script>.py --run_setting_name <user-defined-config>
+runsync_script /path/to/your/project_folder --header_env_setting_name <user-defined-config> --run_script_name <user-script>.py --run_setting_name <user-defined-config>
 ```
 
 
@@ -69,9 +67,9 @@ In an HPC cluster environment such as TSUBAME, users are required to submit a jo
 
 [[script_part.png]]
 
-We can divide a job script into two parts. Header and environment setting part and part where we specify script to run and arguments. qscriptor makes header and environment setting part using dataclass in qscriptor/scriptor/presets/header_ env_settings.py and running script setting with qscriptor/scriptor/presets/run _settings.py.
+We can divide a job script into two parts. Header and environment setting part and part where we specify script to run and arguments. runsync_script makes header and environment setting part using dataclass in runsync/presets/header_ env_settings.py and running script setting with runsync/presets/run _settings.py.
 
-qscriptor/scriptor/presets/header_ env_settings.py
+runsync/presets/header_ env_settings.py
 ```
 @dataclass
 class BaseConfig:
@@ -81,7 +79,7 @@ class BaseConfig:
     cuda_version: str = "cuda/12.1"
     cudnn_version: str = "cudnn/9.0.0"
 ```
-qscriptor/scriptor/presets/run _settings.py
+runsync/presets/run _settings.py
 ```
 @dataclass
 class BaseConfig:
@@ -110,5 +108,5 @@ python {{ context.run_script_name }} \\
 ```
 These context.~ are replaced by contents in dataclasses and then saved at scripts/
 
-You can either modify dataclasses in ~_settings.py, or the template accordingly. For example, you can let qscriptor find the latest checkpoint of your deep learning model and make it to arguments to train.py. This logic can be implmeneted in scriptor object in user _defined _scriptor.py
+You can either modify dataclasses in ~_settings.py, or the template accordingly. For example, you can let runsync_script find the latest checkpoint of your deep learning model and make it to arguments to train.py. This logic can be implmeneted in scriptor object in user _defined _scriptor.py
 

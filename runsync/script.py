@@ -1,4 +1,4 @@
-from scriptor.user_defined_scriptor import ExampleScriptor
+from user_defined_scriptor import ExampleScriptor
 import os
 
 if __name__ == "__main__":

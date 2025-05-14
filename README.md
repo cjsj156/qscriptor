@@ -1,4 +1,4 @@
-### What you can do with runsync
+## What you can do with runsync
 
 You can simply make a job script by typing below command.
 ```
@@ -23,7 +23,7 @@ python example.py \
   --arg2 arg2 \
   --arg3 arg3
 ```
-### Quick start
+## How to use
 ```
 git clone https://github.com/cjsj156/runsync.git
 pip install jinja2
@@ -33,6 +33,7 @@ pip install jinja2
 cd runsync
 ./set_shell_function.sh
 ```
+It makes a shell function runsync_script in .bashrc. After executing the script, do `source ~/.bashrc`
 ### Test runsync_script with BaseConfig
 ```
 runsync_script . --header_env_setting_name BaseConfig --run_script_name example.py --run_setting_name BaseConfig
@@ -47,7 +48,7 @@ This executes example.py with arguments pre-defined in BaseConfig.
 
 ### Make a job script to run a program in your project folder
 
-Now you can copy runsync directory to your project folder like below
+To use this running your script, copy runsync directory to your project folder.
 ```
 cp runsync /path/to/your/project_folder/
 ```
@@ -60,10 +61,10 @@ runsync_script /path/to/your/project_folder --header_env_setting_name <user-defi
 ```
 
 
-### Introduction
+## Why we need this?
 In an HPC cluster environment such as TSUBAME, users are required to submit a job script to execute a program. This script must specify the necessary computational resources, execution environment, the program to be run, and its input arguments. In most cases, once a program is determined, this information remains largely unchanged and becomes boilerplate code. This tool allows users to predefine common configurations and easily generate executable scripts. The generated script helps document the settings used during execution and reduces the likelihood of mistakes that may occur when creating such scripts manually. Moreover, the generated configuration is not only suitable for HPC job scripts but can also be reused for local executions, maintaining consistency between local and HPC environments.
 
-### Script Generation Procedure
+## Script Generation Procedure
 
 [[script_part.png]]
 
